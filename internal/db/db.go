@@ -6,10 +6,10 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/ritu-p/go-rest/internal/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"rest.com/m/internal/models"
 )
 
 var DB *gorm.DB

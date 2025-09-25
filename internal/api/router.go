@@ -2,8 +2,8 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"rest.com/m/internal/api/handlers"
-	"rest.com/m/internal/middleware"
+	"github.com/ritu-p/go-rest/internal/api/handlers"
+	"github.com/ritu-p/go-rest/internal/middleware"
 )
 
 func SetupRouter() *gin.Engine {

@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"rest.com/m/internal/db"
-	"rest.com/m/internal/models"
+	"github.com/ritu-p/go-rest/internal/db"
+	"github.com/ritu-p/go-rest/internal/models"
 )
 
 // CreateUser -> POST /api/v1/users
