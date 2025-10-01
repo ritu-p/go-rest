@@ -1,19 +1,27 @@
 package main
 
 import (
-	"net/http"
+	"log"
+	"os"
 
-	"github.com/gin-gonic/gin"
+	"github.com/ritu-p/go-rest/internal/api"
+	"github.com/ritu-p/go-rest/internal/db"
+	logger "github.com/ritu-p/go-rest/pkg"
 )
 
 func main() {
-	r := gin.Default()
+	if err := db.Connect(); err != nil {
+		log.Fatalf("could not connect to db: %v", err)
+	}
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "Hello, World!",
-		})
-	})
+	router := api.SetupRouter()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-	r.Run(":8080") // listen and serve on 0.0.0.0:8080
+	logger.Infof("starting server on :%s", port)
+	if err := router.Run(":" + port); err != nil {
+		log.Fatalf("server stopped: %v", err)
+	}
 }

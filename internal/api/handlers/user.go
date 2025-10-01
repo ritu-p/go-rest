@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -19,7 +20,7 @@ func CreateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
+	log.Fatalf("entering post user")
 	u := models.User{Name: payload.Name, Email: payload.Email}
 	if err := db.DB.Create(&u).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not create user"})

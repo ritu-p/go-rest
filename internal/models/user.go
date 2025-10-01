@@ -1,19 +1,17 @@
 package models
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
 type User struct {
-	ID    uuid.UUID `json:"id"`
-	Name  string    `json:"name"`
-	Email string    `json:"email"`
-}
-
-var users = []User{
-	{ID: uuid.New(), Name: "Alice", Email: "test@email"},
-	{ID: uuid.New(), Name: "Bob", Email: "test2@email"},
-	{ID: uuid.New(), Name: "Charlie", Email: "test3@email"},
+	ID        uuid.UUID `gorm:"type:uuid;primaryKey" json:"id"`
+	Name      string    `gorm:"size:200;not null" json:"name"`
+	Email     string    `gorm:"size:200;uniqueIndex;not null" json:"email"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // BeforeCreate will set a UUID rather than numeric ID.
