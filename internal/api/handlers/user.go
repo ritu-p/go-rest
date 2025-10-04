@@ -11,16 +11,16 @@ import (
 
 // CreateUser -> POST /api/v1/users
 func CreateUser(c *gin.Context) {
+
 	var payload struct {
 		Name  string `json:"name" binding:"required"`
 		Email string `json:"email" binding:"required,email"`
 	}
-
+	log.Fatalf("entering post user")
 	if err := c.ShouldBindJSON(&payload); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	log.Fatalf("entering post user")
 	u := models.User{Name: payload.Name, Email: payload.Email}
 	if err := db.DB.Create(&u).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not create user"})
